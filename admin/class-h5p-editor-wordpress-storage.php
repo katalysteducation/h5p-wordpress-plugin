@@ -104,6 +104,9 @@ class H5PEditorWordPressStorage implements H5peditorStorage {
               AND semantics IS NOT NULL",
             $library->name, $library->majorVersion, $library->minorVersion
           ));
+        if ($details->metadata_settings === NULL) {
+          $details->metadata_settings = '{}';
+        }
         if ($details) {
           // Library found, add details to list
           $library->tutorialUrl = $details->tutorial_url;
@@ -154,6 +157,9 @@ class H5PEditorWordPressStorage implements H5peditorStorage {
       }
 
       // Convert from string to object
+      if ($library->metadataSettings === NULL) {
+        $library->metadataSettings = '{}';
+      }
       $library->metadataSettings = json_decode($library->metadataSettings);
 
       // Check to see if content type should be restricted

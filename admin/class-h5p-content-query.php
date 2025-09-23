@@ -397,7 +397,7 @@ class H5PContentQuery {
    * @param int $offset  Offset to start at.
    * @param int $limit  Number of items to return.
    */
-  protected function limit_results( $results = array(), $offset = 0, $limit ) {
+  protected function limit_results( $results = array(), $offset = 0, $limit = null ) {
     return array_slice( $results, $offset, $limit );
   }
 }
