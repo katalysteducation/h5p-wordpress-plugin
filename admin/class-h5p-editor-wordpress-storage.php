@@ -104,10 +104,11 @@ class H5PEditorWordPressStorage implements H5peditorStorage {
               AND semantics IS NOT NULL",
             $library->name, $library->majorVersion, $library->minorVersion
           ));
-        if ($details->metadata_settings === NULL) {
-          $details->metadata_settings = '{}';
-        }
+
         if ($details) {
+          if (!isset($details->metadata_settings)) {
+            $details->metadata_settings = '{}';
+          }
           // Library found, add details to list
           $library->tutorialUrl = $details->tutorial_url;
           $library->title = $details->title;

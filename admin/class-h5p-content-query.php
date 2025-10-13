@@ -344,7 +344,7 @@ class H5PContentQuery {
 
       $userdata = get_userdata( $result->user_id );
 
-      if ( in_array( 'user_name', $this->fields_raw, true ) ) {
+      if ( in_array( 'user_name', $this->fields_raw, true ) AND is_object( $userdata ) ) {
         $result->user_name = $userdata->display_name;
       }
     }
