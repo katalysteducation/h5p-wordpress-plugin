@@ -171,6 +171,7 @@ class H5P_Plugin_Admin {
     global $wpdb;
     // Allow other sites to embed
     header_remove('X-Frame-Options');
+    header_remove('Content-Security-Policy');
 
     // Find content
     $slug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_ADD_SLASHES);
