@@ -174,7 +174,7 @@ class H5P_Plugin_Admin {
 
     // Find content
     $slug = filter_input(INPUT_GET, 'slug', FILTER_VALIDATE_REGEXP, [
-      'options' => ['regexp' => '/^[a-z0-9-]+$/i']
+      'options' => ['regexp' => '/^[a-z0-9_-]+$/i']
     ]);
 
     $id = NULL;
