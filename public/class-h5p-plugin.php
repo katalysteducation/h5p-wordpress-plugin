@@ -964,14 +964,14 @@ class H5P_Plugin {
     $author_id = (int)(is_array($content) ? $content['user_id'] : $content->user_id);
 
 	  $metadata = $content['metadata'];
-    $title = isset($metadata['a11yTitle'])
+    $title = esc_attr(isset($metadata['a11yTitle'])
       ? $metadata['a11yTitle']
       : (isset($metadata['title'])
         ? $metadata['title']
         : ''
-      );
+      ));
 
-    $identifier = ($insert_method === 'slug' and !empty($content['slug'])) ? 'slug=' . $content['slug'] : 'id=' . $content['id'];
+    $identifier = esc_attr(($insert_method === 'slug' and !empty($content['slug'])) ? 'slug=' . $content['slug'] : 'id=' . $content['id']);
 
     // Add JavaScript settings for this content
     $settings = array(

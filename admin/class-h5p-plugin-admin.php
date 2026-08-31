@@ -173,18 +173,19 @@ class H5P_Plugin_Admin {
     header_remove('X-Frame-Options');
 
     // Find content
-    $slug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_ADD_SLASHES);
+    $slug = filter_input(INPUT_GET, 'slug', FILTER_VALIDATE_REGEXP, [
+      'options' => ['regexp' => '/^[a-z0-9-]+$/i']
+    ]);
 
     $id = NULL;
 
     if (!empty($slug)) {
-      $q=$wpdb->prepare(
-        "SELECT  id ".
-        "FROM    {$wpdb->prefix}h5p_contents ".
-        "WHERE   slug=%s",
+      $row = $wpdb->get_row($wpdb->prepare(
+        "SELECT id ".
+        "FROM {$wpdb->prefix}h5p_contents ".
+        "WHERE slug = %s",
         $slug
-      );
-      $row=$wpdb->get_row($q,ARRAY_A);
+      ));
 
       if ($wpdb->last_error) {
         return sprintf(__('Database error: %s.', $this->plugin_slug), $wpdb->last_error);
